@@ -18,6 +18,22 @@ const Footer = () => {
             </p>
           </div>
 
+          {/* Navigation Links */}
+          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 mb-6 md:mb-0">
+            <a 
+              href="/rizz-coaches"
+              className="text-text-secondary hover:text-neon-pink transition-colors duration-200"
+            >
+              Rizz Coaches
+            </a>
+            <a 
+              href="/become-a-mentor"
+              className="text-text-secondary hover:text-neon-pink transition-colors duration-200"
+            >
+              Become a Mentor
+            </a>
+          </div>
+
           {/* Social Links */}
           <div className="flex items-center space-x-6 mb-6 md:mb-0">
             <a 

@@ -34,6 +34,12 @@ const Header = () => {
           >
             Rizz Coaches
           </Link>
+          <Link 
+            to="/become-a-mentor"
+            className="text-text-secondary hover:text-neon-pink transition-colors duration-200"
+          >
+            Become a Mentor
+          </Link>
           <button 
             onClick={() => scrollToSection('how-it-works')}
             className="text-text-secondary hover:text-neon-pink transition-colors duration-200"
