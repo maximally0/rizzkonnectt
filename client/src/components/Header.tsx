@@ -1,10 +1,9 @@
 
 import { Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'wouter';
 
 const Header = () => {
-  const navigate = useNavigate();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
