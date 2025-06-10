@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useLocation } from 'wouter';
@@ -7,43 +6,39 @@ import { Heart, Flame, Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
   const [, setLocation] = useLocation();
-  const [toxicityLevel, setToxicityLevel] = useState(45);
-  const [confettiActive, setConfettiActive] = useState(false);
+  const [rizzLevel, setRizzLevel] = useState(42);
+  const [floatingHearts, setFloatingHearts] = useState<Array<{
+    id: number;
+    x: number;
+    y: number;
+    delay: number;
+    size: number;
+    type: 'heart' | 'sparkle' | 'kiss';
+  }>>([]);
 
-  const goToCoaches = () => {
-    setConfettiActive(true);
-    setTimeout(() => setConfettiActive(false), 1000);
-    setLocation('/rizz-coaches');
-  };
+  useEffect(() => {
+    // Generate floating romantic elements
+    const elements = [];
+    for (let i = 0; i < 25; i++) {
+      const types = ['heart', 'sparkle', 'kiss'] as const;
+      elements.push({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        delay: Math.random() * 8,
+        size: 15 + Math.random() * 25,
+        type: types[Math.floor(Math.random() * types.length)]
+      });
+    }
+    setFloatingHearts(elements);
 
-  // Floating hearts animation - positioned to avoid text overlap
-  const FloatingHeart = ({ delay, size, left }: { delay: number; size: string; left: string }) => (
-    <div 
-      className={`absolute ${size} text-neon-pink animate-bounce opacity-30 pointer-events-none z-0`}
-      style={{ 
-        left, 
-        animationDelay: `${delay}s`,
-        animationDuration: '4s',
-        top: `${Math.random() * 40 + 60}%`, // Push hearts lower to avoid text overlap
-      }}
-    >
-      ❤️
-    </div>
-  );
+    // Animate rizz level
+    const interval = setInterval(() => {
+      setRizzLevel(prev => (prev + 1) % 100);
+    }, 100);
 
-  // Sparkle animation - positioned to avoid text overlap
-  const FloatingSparkle = ({ delay, left }: { delay: number; left: string }) => (
-    <div 
-      className="absolute text-xs animate-ping opacity-15 pointer-events-none z-0"
-      style={{ 
-        left, 
-        animationDelay: `${delay}s`,
-        top: `${Math.random() * 30 + 70}%`, // Push sparkles lower to avoid text overlap
-      }}
-    >
-      ✨
-    </div>
-  );
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="hero" className="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden">
@@ -52,24 +47,63 @@ const HeroSection = () => {
         <div className="absolute top-20 left-10 w-32 h-32 bg-neon-pink/10 rounded-full blur-3xl"></div>
         <div className="absolute top-40 right-20 w-48 h-48 bg-neon-pink-light/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-neon-pink/5 rounded-full blur-3xl"></div>
-        
+
         {/* Large heart-shaped glow behind headline */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-neon-pink/20 to-red-500/20 rounded-full blur-3xl opacity-30"></div>
       </div>
 
-      {/* Floating hearts - positioned to avoid text overlap */}
-      <FloatingHeart delay={0} size="text-2xl" left="8%" />
-      <FloatingHeart delay={1} size="text-lg" left="88%" />
-      <FloatingHeart delay={2} size="text-xl" left="12%" />
-      <FloatingHeart delay={0.5} size="text-lg" left="85%" />
-      <FloatingHeart delay={1.5} size="text-2xl" left="92%" />
+      {/* Floating Romantic Elements */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        {floatingHearts.map((element) => (
+          <div
+            key={element.id}
+            className="absolute animate-float opacity-20 hover:opacity-40 transition-opacity duration-500"
+            style={{
+              left: `${element.x}%`,
+              top: `${element.y}%`,
+              animationDelay: `${element.delay}s`,
+              animationDuration: `${3 + Math.random() * 6}s`
+            }}
+          >
+            {element.type === 'heart' && (
+              <Heart 
+                className="text-neon-pink fill-neon-pink animate-pulse" 
+                size={element.size}
+              />
+            )}
+            {element.type === 'sparkle' && (
+              <Sparkles 
+                className="text-purple-400 animate-sparkle" 
+                size={element.size}
+              />
+            )}
+            {element.type === 'kiss' && (
+              <div 
+                className="text-pink-300 animate-bounce"
+                style={{ fontSize: `${element.size}px` }}
+              >
+                💋
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
 
-      {/* Floating sparkles - positioned to avoid text overlap */}
-      <FloatingSparkle delay={0} left="15%" />
-      <FloatingSparkle delay={1} left="85%" />
-      <FloatingSparkle delay={2} left="18%" />
-      <FloatingSparkle delay={0.8} left="82%" />
-      <FloatingSparkle delay={1.8} left="90%" />
+      {/* Cupid's Arrows */}
+      <div className="absolute top-20 left-10 animate-bounce opacity-30">
+        <div className="text-4xl rotate-45">💘</div>
+      </div>
+      <div className="absolute top-40 right-20 animate-pulse opacity-25">
+        <div className="text-3xl -rotate-12">🏹</div>
+      </div>
+
+      {/* Love Confetti */}
+      <div className="absolute top-1/4 left-1/4 animate-spin opacity-20" style={{ animationDuration: '8s' }}>
+        <div className="text-2xl">💕</div>
+      </div>
+      <div className="absolute top-1/3 right-1/3 animate-spin opacity-15" style={{ animationDuration: '10s' }}>
+        <div className="text-xl">💖</div>
+      </div>
 
       {/* Scrolling marquee */}
       <div className="absolute bottom-10 w-full overflow-hidden">
@@ -87,39 +121,70 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-6 text-center relative z-10 py-20">
         {/* Improved headline with better spacing and typography */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-12 leading-tight max-w-2xl mx-auto" style={{ lineHeight: '1.2' }}>
-          From{' '}
-          <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            'left on read'
-          </span>
-          <br className="mb-4" />
-          to{' '}
-          <span className="bg-gradient-to-r from-neon-pink to-red-500 bg-clip-text text-transparent animate-pulse">
-            'get in my bed.'
-          </span>
-          <div className="inline-block ml-2 animate-bounce">❤️</div>
-          <div className="inline-block ml-1 animate-pulse">✨</div>
-        </h1>
-        
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 text-center relative">
+              <span className="block mb-4">
+                From '<span className="text-gray-400 italic">left on read</span>' 
+              </span>
+              <span className="block relative">
+                to '<span className="bg-gradient-to-r from-pink-400 via-neon-pink to-purple-500 bg-clip-text text-transparent animate-pulse font-extrabold relative">
+                  get in my bed
+                  <span className="absolute inset-0 bg-gradient-to-r from-pink-400 via-neon-pink to-purple-500 bg-clip-text text-transparent blur-sm opacity-50 animate-pulse"></span>
+                </span>' 
+                <div className="inline-flex items-center ml-4 space-x-2">
+                  <Heart className="w-12 h-12 md:w-16 md:h-16 text-neon-pink fill-neon-pink animate-heartbeat" />
+                  <div className="text-4xl md:text-6xl animate-bounce">💕</div>
+                  <Sparkles className="w-8 h-8 md:w-12 md:h-12 text-yellow-400 animate-sparkle" />
+                </div>
+              </span>
+
+              {/* Romantic decorative elements around the text */}
+              <div className="absolute -top-8 left-1/4 text-2xl opacity-60 animate-float">💘</div>
+              <div className="absolute -bottom-4 right-1/4 text-xl opacity-50 animate-bounce">💖</div>
+              <div className="absolute top-1/2 -left-12 text-lg opacity-40 animate-pulse">😍</div>
+              <div className="absolute top-1/3 -right-16 text-2xl opacity-45 animate-spin" style={{ animationDuration: '6s' }}>💗</div>
+            </h1>
+
         {/* Improved subheadline with better spacing and typography */}
-        <p className="text-lg md:text-xl text-text-secondary mb-16 max-w-lg mx-auto" style={{ lineHeight: '1.6' }}>
-          Book 1:1 sessions with wild, real-life dating coaches who get you. 💕
-        </p>
+        <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed relative">
+              <span className="inline-flex items-center gap-2 flex-wrap justify-center">
+                Book 1:1 sessions with wild, real-life dating coaches who get you
+                <span className="inline-flex items-center gap-1 animate-pulse">
+                  💕 💘 💖
+                </span>
+              </span>
+              <br />
+              <span className="text-lg text-pink-300 italic mt-2 block">
+                Turn your dating disasters into love stories ✨
+              </span>
+            </p>
 
         {/* Enhanced CTA button with proper spacing */}
-        <div className="relative mb-20">
-          <Button 
-            onClick={goToCoaches}
-            className="neon-button text-xl px-16 py-8 neon-glow animate-heartbeat hover:animate-none bg-gradient-to-r from-neon-pink to-red-500 hover:from-red-500 hover:to-neon-pink transition-all duration-300 rounded-full shadow-lg shadow-neon-pink/50"
-          >
-            Get Rizzed Up Now 🔥💖
-          </Button>
-          
-          {/* Hovering hearts around button */}
-          <Heart className="absolute -top-3 -left-3 w-6 h-6 text-neon-pink animate-bounce opacity-60" fill="currentColor" />
-          <Heart className="absolute -top-3 -right-3 w-4 h-4 text-red-500 animate-pulse opacity-60" fill="currentColor" />
-          <Sparkles className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-5 h-5 text-neon-pink-light animate-ping opacity-60" />
-        </div>
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+              <Button 
+                onClick={() => setLocation('/rizz-coaches')}
+                className="neon-button text-xl px-10 py-5 text-white font-bold relative overflow-hidden group transform hover:scale-105 transition-all duration-300"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Get Rizzed Up Now 
+                  <span className="animate-bounce">💕</span>
+                  <span className="animate-pulse">✨</span>
+                  <span className="animate-spin" style={{ animationDuration: '3s' }}>💫</span>
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-red-400 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              </Button>
+
+              <div className="flex items-center space-x-4 bg-gradient-to-r from-gray-900/60 to-pink-900/20 rounded-full px-6 py-3 backdrop-blur border border-pink-500/20">
+                <span className="text-sm text-gray-300 flex items-center gap-1">
+                  <Heart className="w-4 h-4 text-neon-pink fill-neon-pink animate-pulse" />
+                  Love Potential:
+                </span>
+                <Progress value={rizzLevel} className="w-24 h-2" />
+                <span className="text-sm font-bold text-neon-pink flex items-center gap-1">
+                  {rizzLevel}% 
+                  <span className="text-xs">💖</span>
+                </span>
+              </div>
+            </div>
 
         {/* Redesigned Toxicity Meter with improved spacing */}
         <div className="mb-20 max-w-md mx-auto">
@@ -132,7 +197,7 @@ const HeroSection = () => {
               <div 
                 className="h-full rounded-lg transition-all duration-500 ease-out shadow-lg"
                 style={{ 
-                  width: `${toxicityLevel}%`,
+                  width: `${45}%`,
                   background: `linear-gradient(to right, #4CAF50 0%, #FFC107 50%, #F44336 100%)`,
                   filter: 'drop-shadow(0 0 8px rgba(255, 59, 92, 0.3))'
                 }}
@@ -142,8 +207,8 @@ const HeroSection = () => {
               type="range"
               min="0"
               max="100"
-              value={toxicityLevel}
-              onChange={(e) => setToxicityLevel(Number(e.target.value))}
+              value={45}
+              onChange={(e) => {}}
               className="absolute top-0 w-full h-4 opacity-0 cursor-pointer"
             />
           </div>
@@ -168,8 +233,7 @@ const HeroSection = () => {
         </div>
 
         {/* Confetti effect */}
-        {confettiActive && (
-          <div className="absolute inset-0 pointer-events-none z-20">
+        <div className="absolute inset-0 pointer-events-none z-20">
             {[...Array(20)].map((_, i) => (
               <div
                 key={i}
@@ -183,7 +247,6 @@ const HeroSection = () => {
               </div>
             ))}
           </div>
-        )}
       </div>
     </section>
   );

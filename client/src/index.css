@@ -184,7 +184,27 @@
 /* New animations for the hero section */
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes love-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  50% { 
+    transform: scale(1.1); 
+    filter: brightness(1.2) hue-rotate(10deg);
+  }
+}
+
+@keyframes romantic-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(255, 59, 92, 0.4), 0 0 40px rgba(255, 59, 92, 0.2); 
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(255, 59, 92, 0.6), 0 0 60px rgba(255, 59, 92, 0.4); 
+  }
 }
 
 @keyframes scroll {
@@ -205,12 +225,16 @@
 
 @keyframes float {
   0%, 100% { 
-    transform: translateY(0px) rotate(0deg); 
+    transform: translateY(0px) rotate(0deg) scale(1); 
     opacity: 0.3;
   }
-  50% { 
-    transform: translateY(-20px) rotate(180deg); 
-    opacity: 0.7;
+  33% { 
+    transform: translateY(-15px) rotate(60deg) scale(1.05); 
+    opacity: 0.6;
+  }
+  66% { 
+    transform: translateY(-25px) rotate(120deg) scale(0.95); 
+    opacity: 0.8;
   }
 }
 
@@ -219,22 +243,68 @@
     transform: scale(0.8) rotate(0deg); 
     opacity: 0.4;
   }
-  50% { 
-    transform: scale(1.2) rotate(90deg); 
-    opacity: 0.8;
+  25% { 
+    transform: scale(1.1) rotate(90deg); 
+    opacity: 0.7;
   }
+  50% { 
+    transform: scale(1.3) rotate(180deg); 
+    opacity: 1;
+  }
+  75% { 
+    transform: scale(1.1) rotate(270deg); 
+    opacity: 0.7;
+  }
+}
+
+@keyframes love-bounce {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+  }
+  25% { 
+    transform: translateY(-10px) scale(1.1);
+  }
+  50% { 
+    transform: translateY(-20px) scale(1.2);
+  }
+  75% { 
+    transform: translateY(-5px) scale(1.05);
+  }
+}
+
+@keyframes kiss-wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-5deg) scale(1.05); }
+  50% { transform: rotate(5deg) scale(1.1); }
+  75% { transform: rotate(-3deg) scale(1.02); }
 }
 
 .animate-heartbeat {
   animation: heartbeat 2s ease-in-out infinite;
 }
 
+.animate-love-pulse {
+  animation: love-pulse 3s ease-in-out infinite;
+}
+
+.animate-romantic-glow {
+  animation: romantic-glow 2s ease-in-out infinite;
+}
+
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 .animate-sparkle {
-  animation: sparkle 2s ease-in-out infinite;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+.animate-love-bounce {
+  animation: love-bounce 2s ease-in-out infinite;
+}
+
+.animate-kiss-wiggle {
+  animation: kiss-wiggle 1.5s ease-in-out infinite;
 }
 
 .animate-scroll {
