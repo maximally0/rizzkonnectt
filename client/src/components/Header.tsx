@@ -53,14 +53,18 @@ const Header = () => {
           >
             How It Works
           </button>
-          <Link to="/">
-            <Button 
-              onClick={() => scrollToSection('hero')}
-              className="neon-button"
-            >
-              Get Started
-            </Button>
-          </Link>
+          <Button 
+            onClick={() => {
+              if (location !== '/') {
+                window.location.href = '/';
+              } else {
+                scrollToSection('hero');
+              }
+            }}
+            className="neon-button"
+          >
+            Get Started
+          </Button>
         </nav>
 
         {/* Mobile menu button */}
