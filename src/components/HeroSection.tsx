@@ -1,12 +1,12 @@
 
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
-  const scrollToMentors = () => {
-    const element = document.getElementById('mentors');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const navigate = useNavigate();
+
+  const goToCoaches = () => {
+    navigate('/rizz-coaches');
   };
 
   return (
@@ -33,7 +33,7 @@ const HeroSection = () => {
         </p>
 
         <Button 
-          onClick={scrollToMentors}
+          onClick={goToCoaches}
           className="neon-button text-lg px-8 py-4 neon-glow animate-pulse hover:animate-none"
         >
           Get Rizzed Up Now 🔥
