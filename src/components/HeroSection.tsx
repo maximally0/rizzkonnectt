@@ -16,31 +16,29 @@ const HeroSection = () => {
     navigate('/rizz-coaches');
   };
 
-  // Floating hearts animation - adjusted positioning to avoid overlap
+  // Floating hearts animation - positioned to avoid text overlap
   const FloatingHeart = ({ delay, size, left }: { delay: number; size: string; left: string }) => (
     <div 
-      className={`absolute ${size} text-neon-pink animate-bounce opacity-40 pointer-events-none`}
+      className={`absolute ${size} text-neon-pink animate-bounce opacity-30 pointer-events-none z-0`}
       style={{ 
         left, 
         animationDelay: `${delay}s`,
         animationDuration: '4s',
-        top: `${Math.random() * 60 + 20}%`,
-        zIndex: 1
+        top: `${Math.random() * 40 + 60}%`, // Push hearts lower to avoid text overlap
       }}
     >
       ❤️
     </div>
   );
 
-  // Sparkle animation - reduced opacity and positioned to avoid text overlap
+  // Sparkle animation - positioned to avoid text overlap
   const FloatingSparkle = ({ delay, left }: { delay: number; left: string }) => (
     <div 
-      className="absolute text-xs animate-ping opacity-20 pointer-events-none"
+      className="absolute text-xs animate-ping opacity-15 pointer-events-none z-0"
       style={{ 
         left, 
         animationDelay: `${delay}s`,
-        top: `${Math.random() * 50 + 25}%`,
-        zIndex: 1
+        top: `${Math.random() * 30 + 70}%`, // Push sparkles lower to avoid text overlap
       }}
     >
       ✨
@@ -60,18 +58,18 @@ const HeroSection = () => {
       </div>
 
       {/* Floating hearts - positioned to avoid text overlap */}
-      <FloatingHeart delay={0} size="text-2xl" left="5%" />
-      <FloatingHeart delay={1} size="text-lg" left="90%" />
-      <FloatingHeart delay={2} size="text-xl" left="15%" />
+      <FloatingHeart delay={0} size="text-2xl" left="8%" />
+      <FloatingHeart delay={1} size="text-lg" left="88%" />
+      <FloatingHeart delay={2} size="text-xl" left="12%" />
       <FloatingHeart delay={0.5} size="text-lg" left="85%" />
-      <FloatingHeart delay={1.5} size="text-2xl" left="95%" />
+      <FloatingHeart delay={1.5} size="text-2xl" left="92%" />
 
       {/* Floating sparkles - positioned to avoid text overlap */}
-      <FloatingSparkle delay={0} left="10%" />
-      <FloatingSparkle delay={1} left="88%" />
-      <FloatingSparkle delay={2} left="20%" />
-      <FloatingSparkle delay={0.8} left="80%" />
-      <FloatingSparkle delay={1.8} left="92%" />
+      <FloatingSparkle delay={0} left="15%" />
+      <FloatingSparkle delay={1} left="85%" />
+      <FloatingSparkle delay={2} left="18%" />
+      <FloatingSparkle delay={0.8} left="82%" />
+      <FloatingSparkle delay={1.8} left="90%" />
 
       {/* Scrolling marquee */}
       <div className="absolute bottom-10 w-full overflow-hidden">
@@ -87,14 +85,14 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10 py-16">
-        {/* Improved headline with better spacing */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight max-w-6xl mx-auto">
+      <div className="container mx-auto px-6 text-center relative z-10 py-20">
+        {/* Improved headline with better spacing and typography */}
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-12 leading-tight max-w-2xl mx-auto" style={{ lineHeight: '1.2' }}>
           From{' '}
           <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             'left on read'
           </span>
-          <br />
+          <br className="mb-4" />
           to{' '}
           <span className="bg-gradient-to-r from-neon-pink to-red-500 bg-clip-text text-transparent animate-pulse">
             'get in my bed.'
@@ -103,13 +101,13 @@ const HeroSection = () => {
           <div className="inline-block ml-1 animate-pulse">✨</div>
         </h1>
         
-        {/* Improved subheadline with better line height */}
-        <p className="text-lg md:text-xl text-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
+        {/* Improved subheadline with better spacing and typography */}
+        <p className="text-lg md:text-xl text-text-secondary mb-16 max-w-lg mx-auto" style={{ lineHeight: '1.6' }}>
           Book 1:1 sessions with wild, real-life dating coaches who get you. 💕
         </p>
 
-        {/* Enhanced CTA button with better spacing */}
-        <div className="relative mb-16">
+        {/* Enhanced CTA button with proper spacing */}
+        <div className="relative mb-20">
           <Button 
             onClick={goToCoaches}
             className="neon-button text-xl px-16 py-8 neon-glow animate-heartbeat hover:animate-none bg-gradient-to-r from-neon-pink to-red-500 hover:from-red-500 hover:to-neon-pink transition-all duration-300 rounded-full shadow-lg shadow-neon-pink/50"
@@ -117,26 +115,29 @@ const HeroSection = () => {
             Get Rizzed Up Now 🔥💖
           </Button>
           
-          {/* Hovering hearts around button - better positioned */}
+          {/* Hovering hearts around button */}
           <Heart className="absolute -top-3 -left-3 w-6 h-6 text-neon-pink animate-bounce opacity-60" fill="currentColor" />
           <Heart className="absolute -top-3 -right-3 w-4 h-4 text-red-500 animate-pulse opacity-60" fill="currentColor" />
           <Sparkles className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-5 h-5 text-neon-pink-light animate-ping opacity-60" />
         </div>
 
-        {/* Toxicity Meter with improved spacing and alignment */}
-        <div className="mb-12 max-w-md mx-auto">
-          <h3 className="text-lg font-semibold mb-6 text-white">
+        {/* Redesigned Toxicity Meter with improved spacing */}
+        <div className="mb-20 max-w-md mx-auto">
+          <h3 className="text-lg font-semibold mb-8 text-white">
             How toxic is your DM game? 💀
           </h3>
-          <div className="relative mb-4">
-            <Progress 
-              value={toxicityLevel} 
-              className="h-4 bg-gray-800 rounded-full overflow-hidden"
-            />
-            <div 
-              className="absolute top-0 h-4 rounded-full bg-gradient-to-r from-green-400 via-neon-pink to-red-500 transition-all duration-300"
-              style={{ width: `${toxicityLevel}%` }}
-            ></div>
+          <div className="relative mb-6">
+            {/* Custom progress bar with gradient */}
+            <div className="w-full h-4 bg-gray-800 rounded-lg overflow-hidden shadow-inner">
+              <div 
+                className="h-full rounded-lg transition-all duration-500 ease-out shadow-lg"
+                style={{ 
+                  width: `${toxicityLevel}%`,
+                  background: `linear-gradient(to right, #4CAF50 0%, #FFC107 50%, #F44336 100%)`,
+                  filter: 'drop-shadow(0 0 8px rgba(255, 59, 92, 0.3))'
+                }}
+              ></div>
+            </div>
             <input
               type="range"
               min="0"
@@ -146,23 +147,23 @@ const HeroSection = () => {
               className="absolute top-0 w-full h-4 opacity-0 cursor-pointer"
             />
           </div>
-          {/* Better aligned labels */}
-          <div className="flex justify-between text-xs text-text-secondary max-w-md mx-auto px-2">
-            <span>Green Flag 💚</span>
-            <span>Red Flag 🚩</span>
+          {/* Better aligned and styled labels */}
+          <div className="flex justify-between items-center text-sm max-w-md mx-auto px-1">
+            <span className="text-green-400 font-medium">💚 Green Flag</span>
+            <span className="text-red-400 font-medium">🚩 Red Flag</span>
           </div>
         </div>
 
         {/* Rizz Resume Badges with improved spacing and uniformity */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16 max-w-2xl mx-auto">
-          <div className="bg-gray-800/50 rounded-full px-6 py-3 border border-gray-700 backdrop-blur-sm flex-shrink-0">
-            <span className="text-sm text-gray-400">💀 Dry Texter</span>
+        <div className="flex flex-wrap justify-center gap-6 mb-20 max-w-2xl mx-auto">
+          <div className="bg-gray-800/50 rounded-full px-8 py-4 border border-gray-700 backdrop-blur-sm flex-shrink-0 min-w-[140px]">
+            <span className="text-sm text-gray-400 font-medium">💀 Dry Texter</span>
           </div>
-          <div className="bg-neon-pink/20 rounded-full px-6 py-3 border border-neon-pink/50 backdrop-blur-sm flex-shrink-0">
-            <span className="text-sm text-neon-pink">🥺 Soft Boy</span>
+          <div className="bg-neon-pink/20 rounded-full px-8 py-4 border border-neon-pink/50 backdrop-blur-sm flex-shrink-0 min-w-[140px]">
+            <span className="text-sm text-neon-pink font-medium">🥺 Soft Boy</span>
           </div>
-          <div className="bg-gradient-to-r from-neon-pink/20 to-red-500/20 rounded-full px-6 py-3 border border-red-500/50 backdrop-blur-sm flex-shrink-0">
-            <span className="text-sm text-red-400">🔥 Rizz Legend</span>
+          <div className="bg-gradient-to-r from-neon-pink/20 to-red-500/20 rounded-full px-8 py-4 border border-red-500/50 backdrop-blur-sm flex-shrink-0 min-w-[140px]">
+            <span className="text-sm text-red-400 font-medium">🔥 Rizz Legend</span>
           </div>
         </div>
 
