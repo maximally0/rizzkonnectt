@@ -126,9 +126,8 @@ const HeroSection = () => {
                 From '<span className="text-gray-400 italic">left on read</span>' 
               </span>
               <span className="block relative">
-                to '<span className="bg-gradient-to-r from-pink-400 via-neon-pink to-purple-500 bg-clip-text text-transparent animate-pulse font-extrabold relative">
+                to '<span className="text-neon-pink animate-pulse font-extrabold">
                   get in my bed
-                  <span className="absolute inset-0 bg-gradient-to-r from-pink-400 via-neon-pink to-purple-500 bg-clip-text text-transparent blur-sm opacity-50 animate-pulse"></span>
                 </span>' 
                 <div className="inline-flex items-center ml-4 space-x-2">
                   <Heart className="w-12 h-12 md:w-16 md:h-16 text-neon-pink fill-neon-pink animate-heartbeat" />
