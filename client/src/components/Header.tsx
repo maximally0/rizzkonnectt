@@ -1,11 +1,18 @@
 
 import { Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 
 const Header = () => {
+  const [location] = useLocation();
 
   const scrollToSection = (sectionId: string) => {
+    // If we're not on the home page, navigate there first
+    if (location !== '/') {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
+    
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -46,12 +53,14 @@ const Header = () => {
           >
             How It Works
           </button>
-          <Button 
-            onClick={() => scrollToSection('hero')}
-            className="neon-button"
-          >
-            Get Started
-          </Button>
+          <Link to="/">
+            <Button 
+              onClick={() => scrollToSection('hero')}
+              className="neon-button"
+            >
+              Get Started
+            </Button>
+          </Link>
         </nav>
 
         {/* Mobile menu button */}

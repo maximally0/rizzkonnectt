@@ -115,7 +115,7 @@ const RizzCoaches = () => {
   return (
     <div className="min-h-screen bg-dark-bg">
       <Header />
-      
+
       <main className="pt-20 pb-16">
         <div className="container mx-auto px-4">
           {/* Page Header */}
@@ -133,14 +133,14 @@ const RizzCoaches = () => {
 
           {/* Coaches Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {coaches.map((coach) => (
+            {coaches && coaches.length > 0 ? coaches.map((coach) => (
               <div 
                 key={coach.id} 
                 className="bg-gradient-to-br from-dark-card via-dark-card to-purple-900/20 rounded-3xl p-6 border border-gray-700 hover:border-neon-pink/50 transition-all duration-500 hover:shadow-2xl hover:shadow-neon-pink/20 hover:scale-105 relative overflow-hidden"
               >
                 {/* Holographic overlay effect */}
                 <div className="absolute inset-0 bg-gradient-to-45deg from-transparent via-neon-pink/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Coach Identity Section */}
                 <div className="relative z-10 mb-6">
                   <div className="flex items-center gap-4 mb-4">
@@ -171,7 +171,7 @@ const RizzCoaches = () => {
                       style={{ width: `${coach.auraLevel}%` }}
                     />
                   </div>
-                  
+
                   {/* Sub-meters */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
@@ -250,7 +250,11 @@ const RizzCoaches = () => {
                   Book Session ✨
                 </Button>
               </div>
-            ))}
+            )) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-text-secondary text-lg">Loading coaches...</p>
+              </div>
+            )}
           </div>
         </div>
       </main>
