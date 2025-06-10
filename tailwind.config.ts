@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// RizzKonnect custom colors
+				'dark-bg': '#0D0D0D',
+				'dark-card': '#1A1A1A',
+				'neon-pink': '#FF3B5C',
+				'neon-pink-light': '#FF758F',
+				'text-primary': '#FFFFFF',
+				'text-secondary': '#A0A0A0'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +92,26 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'swipe-right': {
+					'0%': { transform: 'translateX(0) rotate(0deg)', opacity: '1' },
+					'100%': { transform: 'translateX(100px) rotate(15deg)', opacity: '0' }
+				},
+				'swipe-left': {
+					'0%': { transform: 'translateX(0) rotate(0deg)', opacity: '1' },
+					'100%': { transform: 'translateX(-100px) rotate(-15deg)', opacity: '0' }
+				},
+				'neon-glow': {
+					'0%, 100%': { boxShadow: '0 0 5px #FF3B5C, 0 0 10px #FF3B5C, 0 0 15px #FF3B5C' },
+					'50%': { boxShadow: '0 0 10px #FF3B5C, 0 0 20px #FF3B5C, 0 0 30px #FF3B5C' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'swipe-right': 'swipe-right 0.3s ease-out forwards',
+				'swipe-left': 'swipe-left 0.3s ease-out forwards',
+				'neon-glow': 'neon-glow 2s ease-in-out infinite'
 			}
 		}
 	},
