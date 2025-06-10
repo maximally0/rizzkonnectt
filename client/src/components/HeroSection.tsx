@@ -1,19 +1,19 @@
 
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { useState, useEffect } from 'react';
 import { Heart, Flame, Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   const [toxicityLevel, setToxicityLevel] = useState(45);
   const [confettiActive, setConfettiActive] = useState(false);
 
   const goToCoaches = () => {
     setConfettiActive(true);
     setTimeout(() => setConfettiActive(false), 1000);
-    navigate('/rizz-coaches');
+    setLocation('/rizz-coaches');
   };
 
   // Floating hearts animation - positioned to avoid text overlap
